@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+<p>
+class String
+{
+public:
+	String();
+	String(const char *s);
+	String(const String&s);
+	friend bool operator>(const String&s1, const String&s2);
+	friend bool operator<(const String&s1, const String&s2);
+	friend bool operator==(const String&s1, const String&s2);
+	const String operator+(const String&s1);
+	const String operator=(const String&s1);
+	const char & operator[](int n) const;
+	const int length() const;
+	void show() const;
+private:
+	char *list;
+	int len;
+};
+String::String()
+{
+	len = 0;
+	list = new char[1];
+	list[0] = '\0';
+}
+String::String(const char* s)
+{
+	len = std::strlen(s);
+	list = new char[len + 1];
+	std::strcpy(list, s);
+}
+String::String(const String&s)
+{
+	len = 0;
+	list = s.list;
+}
+bool operator>(const String&s1, const String&s2)
+{
+	if (std::strcmp(s1.list, s2.list) > 0)
+		return true;
+	else
+	{
+		return false;
+	}
+}
+
+bool operator<(const String&s1, const String&s2)
+{
+	if (std::strcmp(s1.list, s2.list) < 0)
+		return true;
+	else
+	{
+		return false;
+	}
+}
+
+bool operator==(const String&s1, const String&s2)
+{
+	if (std::strcmp(s1.list, s2.list) == 0)
+		return true;
+	else
+	{
+		return false;
+	}
+}
+
+const char &String::operator[](int n) const
+{
+	return list[n];
+}
+const int String::length() const
+{
+	return len;
+}
+const String String::operator+(const String &s1)
+{
+	std::strcat(list, s1.list);
+	return *this;
+}
+void String::show()const
+{
+	std::cout << list << std::endl;
+}
+const String String::operator=(const String& s1)
+{
+	int list_len = std::strlen(list);
+	char *temp = new char[len];
+	std::strcpy(temp, s1.list);
+	list = temp;
+	return *this;
+}
+int main()
+{
+	String str("stephan"),sty("delphin");
+	std::cout << str.length() << std::endl;
+	std::cout << sty.length() << std::endl;
+	str.show();
+	sty.show();
+	std::cout << (str < sty) << std::endl;
+	std::cout << str[2] <<'\t'<<sty[3] <<std::endl;
+	str = sty;
+	str.show();
+    return 0;
+}
+</p>
+	</body>
+</html>
